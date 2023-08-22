@@ -1,3 +1,9 @@
+<?php
+
+$vista = $_GET['ruta'] ?? 'preguntas';
+
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -23,7 +29,11 @@
 
     <?php
     include_once 'modulos/header.php';
-    include_once 'modulos/preguntas.php';
+    if ($vista === 'preguntas' || $vista === 'perfil') {
+        include_once 'modulos/' . $vista . '.php';
+    } else {
+        include_once 'modulos/404.php';
+    }
     include_once 'modulos/footer.php';
     ?>
 
