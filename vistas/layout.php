@@ -1,6 +1,14 @@
 <?php
 
-$vista = $_GET['ruta'] ?? 'preguntas';
+if(isset($_GET['ruta'])){
+    $vista = explode('/', $_GET['ruta']);
+    $vista = $vista[0];
+
+}else{
+    $vista = 'preguntas';
+}
+
+
 
 ?>
 
@@ -13,14 +21,14 @@ $vista = $_GET['ruta'] ?? 'preguntas';
     <title>Consultas | Posgrado</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-    <link rel="stylesheet" href="vistas/plugins/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="vistas/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL?>vistas/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL?>vistas/dist/css/adminlte.min.css" />
     <!-- SCRIPTS    -->
-    <script src="vistas/plugins/jquery/jquery.min.js"></script>
+    <script src="<?= BASE_URL?>vistas/plugins/jquery/jquery.min.js"></script>
     <!-- Boostrap v 4.6 -->
-    <script src="vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= BASE_URL?>vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- adminlte 3.0.1 -->
-    <script src="vistas/dist/js/adminlte.min.js"></script>
+    <script src="<?= BASE_URL?>vistas/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -29,7 +37,7 @@ $vista = $_GET['ruta'] ?? 'preguntas';
 
     <?php
     include_once 'modulos/header.php';
-    if ($vista === 'preguntas' || $vista === 'perfil') {
+    if ($vista === 'preguntas' || $vista === 'perfil' || $vista === 'respuesta' || $vista === 'pregunta') {
         include_once 'modulos/' . $vista . '.php';
     } else {
         include_once 'modulos/404.php';

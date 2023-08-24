@@ -1,3 +1,9 @@
+<?php
+$vista = explode('/', $_GET['ruta']);
+$pregunta = Pregunta::listarPreguntas('pregunta', 'id_pregunta', $vista[1]);
+$respuestas = Respuesta::listarRespuestas('respuesta', 'id_pregunta', $vista[1]);
+?>
+
 <div class="content-wrapper">
     <div class="content-header">
         <div class="container">
@@ -24,61 +30,59 @@
                             <div class="tab-content">
                                 <div class="active tab-pane" id="activity ">
                                     <!-- Post -->
-
                                     <div class="post">
                                         <div class="user-block">
                                             <img class="img-circle img-bordered-sm" src="/vistas/dist/images/user.png" width="128px" alt="user image ">
                                             <span class="username">
-                                                <a href="#">Erro 500 que significa</a>
-                                                <p>Pedro Lopez</p>
+                                                <p><?= $pregunta['titulo'] ?></p>
+                                                <p>Usuario</p>
                                             </span>
-                                            <span class="description">Compartido públicamente -
-                                                15/12/2021 </span>
+                                            <span class="description">Compartido públicamente -<?= $pregunta['creado_el'] ?> </span>
                                         </div>
-                                        <!-- /.user-block -->
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere quas veritatis eum molestias assumenda cupiditate similique exercitationem? Ullam voluptatum nesciunt iusto quod iste, nulla, aliquam alias, id temporibus tenetur eligendi!
-                                        </p>
-                                        <img class="img-fluid pad" src="" alt="Photo">
+
+                                        <p><?= $pregunta['descripcion'] ?></p>
+
+                                        <img class="img-fluid pad" src="<?= BASE_URL . $pregunta['imagen'] ?>" alt="Photo">
 
                                     </div>
                                     <!-- /.post -->
 
                                     <!-- Respuestas -->
 
+                                    <?php if ($respuestas) : ?>
+                                        <h3> <?= count($respuestas) > 1 ? count($respuestas) . ' respuestas' : count($respuestas) . ' respuesta' ?></h3>
+                                        <hr>
+                                        <?php foreach ($respuestas as $key => $respuesta) : ?>
+                                            <div class="post clearfix">
+                                                <!-- /.user-block -->
+                                                <p>
+                                                    <?= 'Respuesta ' . ($key + 1) . ': <br>' . $respuesta['descripcion'] ?>
+                                                </p>
 
-                                    <h3> 5 Respuestas</h3>
-                                    <hr>
-                                    <div class="post clearfix">
-                                        <!-- /.user-block -->
-                                        <p>
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere numquam ipsa, rerum, quo porro error eius quis itaque ea autem illum nihil aliquam suscipit accusantium? Incidunt vel fuga totam blanditiis.
-                                        </p>
 
-                                        <div class="border float-right ml-5 p-1  mb-2">
-                                            <img class="img-fluid pad" src="" alt="respuesta">
-                                        </div>
+                                                <?php if ($respuesta['imagen'] !== null) : ?>
+                                                    <div class="border float-right ml-5 p-1  mb-2">
+                                                        <img class="img-fluid pad" src="<?= BASE_URL . $respuesta['imagen'] ?>" alt="<?= $respuesta['descripcion'] ?>">
+                                                    </div>
+                                                <?php endif; ?>
 
-                                        <div class="row d-flex justify-content-end">
-                                            <div class="col-md-6">
-                                                <!-- <p class="float-left ml-2">
-                                                            <a href="# " class="link-black text-primary">
-                                                                <i class="fa fa-thumbs-up mr-1"></i> </a>
-                                                            10 Like
-                                                        </p> -->
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="user-block">
-                                                    <img class="img-circle img-bordered-sm" src="vistas/dist/images/user.png" alt="User Image" />
-                                                    <span class="username">
-                                                        /<small class="text-sm text-muted">Respondido el 15/07/2022 por:</small>/
-                                                        <p>Pablo Marmol</p>
-                                                    </span>
+                                                <div class="row d-flex justify-content-end">
+                                                    <div class="col-md-6">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="user-block">
+                                                            <img class="img-circle img-bordered-sm" src="<?= BASE_URL ?>vistas/dist/images/user.png" alt="User Image" />
+                                                            <span class="username">
+                                                                <small class="text-sm text-muted">Respondido el <?= $respuesta['creado_el'] ?> por: </small>
+                                                                <p>Usuario Respondido</p>
+                                                            </span>
 
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
 
 
                                     <div class="card card-primary card-outline">
