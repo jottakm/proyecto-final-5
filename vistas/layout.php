@@ -1,13 +1,17 @@
 <?php
 
-if(isset($_GET['ruta'])){
+session_start();
+
+$clase = '';
+if (isset($_GET['ruta'])) {
     $vista = explode('/', $_GET['ruta']);
     $vista = $vista[0];
-
-}else{
+    if ($vista == 'login' || $vista == 'registro') {
+        $clase = 'login-page';
+    }
+} else {
     $vista = 'preguntas';
 }
-
 
 
 ?>
@@ -21,28 +25,33 @@ if(isset($_GET['ruta'])){
     <title>Consultas | Posgrado</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
-    <link rel="stylesheet" href="<?= BASE_URL?>vistas/plugins/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="<?= BASE_URL?>vistas/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>vistas/plugins/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="<?= BASE_URL ?>vistas/dist/css/adminlte.min.css" />
     <!-- SCRIPTS    -->
-    <script src="<?= BASE_URL?>vistas/plugins/jquery/jquery.min.js"></script>
+    <script src="<?= BASE_URL ?>vistas/plugins/jquery/jquery.min.js"></script>
     <!-- Boostrap v 4.6 -->
-    <script src="<?= BASE_URL?>vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= BASE_URL ?>vistas/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- adminlte 3.0.1 -->
-    <script src="<?= BASE_URL?>vistas/dist/js/adminlte.min.js"></script>
+    <script src="<?= BASE_URL ?>vistas/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav <?= $clase ?>">
 
     <?php
-    include_once 'modulos/header.php';
-    if ($vista === 'preguntas' || $vista === 'perfil' || $vista === 'respuesta' || $vista === 'pregunta') {
+
+    if ($vista != 'login' && $vista != 'registro')
+        include_once 'modulos/header.php';
+
+    if ($vista === 'preguntas' || $vista === 'perfil' || $vista === 'respuesta' || $vista === 'pregunta' || $vista === 'registro' || $vista === 'login') {
         include_once 'modulos/' . $vista . '.php';
     } else {
         include_once 'modulos/404.php';
     }
-    include_once 'modulos/footer.php';
+
+    if ($vista != 'login' && $vista != 'registro')
+        include_once 'modulos/footer.php';
     ?>
 
 </body>

@@ -24,8 +24,8 @@ class Pregunta
                     $datos = [
                         'titulo'      => trim($_POST['titulo']),
                         'descripcion' => trim($_POST['descripcion']),
-                        'imagen'        => $archivo,
-                        'id_usuario'  => 1
+                        'imagen'      => $archivo,
+                        'id_usuario'  => $_SESSION['id_usuario']
                     ];
 
                     $respuesta = PreguntaModel::guardarPregunta('pregunta', $datos);
@@ -51,10 +51,6 @@ class Pregunta
                     alert('El campo título y la descripción no debe contener caracteres especiales.');
                 </script>";
             }
-        } else {
-            echo "<script>
-                alert('El campo título y la descripción son requeridos.');
-            </script>";
         }
     }
 }

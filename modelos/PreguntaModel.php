@@ -8,11 +8,13 @@ class PreguntaModel
     static public function listarPreguntas($tabla, $columna, $valor)
     {
         if ($columna === NULL && $valor === NULL) {
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla");
+            $stmt = Conexion::conectar()->prepare("SELECT p.*, concat_ws(' ', pp.nombre, pp.paterno, pp.materno) AS usuario FROM $tabla p JOIN usuario u ON p.id_usuario=u.id_usuario
+                                                  JOIN persona pp ON u.id_usuario=pp.id_persona");
             $stmt->execute();
             return $stmt->fetchAll();
         } else {
-            $stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $columna=:$columna");
+            $stmt = Conexion::conectar()->prepare("SELECT p.*, concat_ws(' ', pp.nombre, pp.paterno, pp.materno) AS usuario FROM $tabla p JOIN usuario u ON p.id_usuario=u.id_usuario
+                                                   JOIN persona pp ON u.id_usuario=pp.id_persona  WHERE $columna=:$columna");
             $stmt->bindParam(":" . $columna, $valor, PDO::PARAM_INT);
             $stmt->execute();
             return $stmt->fetch();

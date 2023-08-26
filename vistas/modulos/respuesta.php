@@ -35,7 +35,7 @@ $respuestas = Respuesta::listarRespuestas('respuesta', 'id_pregunta', $vista[1])
                                             <img class="img-circle img-bordered-sm" src="/vistas/dist/images/user.png" width="128px" alt="user image ">
                                             <span class="username">
                                                 <p><?= $pregunta['titulo'] ?></p>
-                                                <p>Usuario</p>
+                                                <p class="text-info"><?= $pregunta['usuario'] ?></p>
                                             </span>
                                             <span class="description">Compartido públicamente -<?= $pregunta['creado_el'] ?> </span>
                                         </div>
@@ -74,7 +74,7 @@ $respuestas = Respuesta::listarRespuestas('respuesta', 'id_pregunta', $vista[1])
                                                             <img class="img-circle img-bordered-sm" src="<?= BASE_URL ?>vistas/dist/images/user.png" alt="User Image" />
                                                             <span class="username">
                                                                 <small class="text-sm text-muted">Respondido el <?= $respuesta['creado_el'] ?> por: </small>
-                                                                <p>Usuario Respondido</p>
+                                                                <p><?= $respuesta['usuario'] ?></p>
                                                             </span>
 
                                                         </div>
@@ -89,13 +89,12 @@ $respuestas = Respuesta::listarRespuestas('respuesta', 'id_pregunta', $vista[1])
                                         <div class="card-header">
                                             <h3 class="card-title">Tu respuesta</h3>
                                         </div>
-                                        <!-- /.card-header -->
                                         <form method="POST" enctype="multipart/form-data">
                                             <div class="card-body">
                                                 <h5>Escribe tu respuesta:</h5>
                                                 <div class="form-group">
-                                                    <input type="hidden" name="id_pregunta" id="id_pregunta" value="<?= $id_pregunta ?>">
-                                                    <textarea name="descripcion_respuesta" id="descripcion_respuesta" class="form-control" rows="5" required></textarea>
+                                                    <input type="hidden" name="id_pregunta" id="id_pregunta" value="<?= $pregunta['id_pregunta'] ?>">
+                                                    <textarea name="descripcion" id="descripcion" class="form-control" rows="5" required></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="btn btn-default btn-file">
@@ -104,13 +103,16 @@ $respuestas = Respuesta::listarRespuestas('respuesta', 'id_pregunta', $vista[1])
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- /.card-body -->
                                             <div class="card-footer">
                                                 <div class="float-right">
                                                     <button type="submit" class="btn btn-primary"> Publicar tu respuesta</button>
                                                 </div>
                                             </div>
-                                            <!-- /.card-footer -->
+
+                                            <?php
+                                            $respuesta = new Respuesta();
+                                            $respuesta->guardarRespuesta();
+                                            ?>
 
                                         </form>
                                     </div>

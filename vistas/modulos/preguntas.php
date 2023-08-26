@@ -37,7 +37,7 @@ $preguntas = Pregunta::listarPreguntas('pregunta', $columna, $valor);
                                                     <img class="img-circle img-bordered-sm" src="vistas/dist/images/user.png" alt="Imagen de usuario">
                                                     <span class="username">
                                                         <a href="respuesta/<?= $pregunta['id_pregunta'] ?>"><?= $pregunta['titulo'] ?></a>
-                                                        <p>Usuario</p>
+                                                        <p><?= $pregunta['usuario'] ?></p>
                                                     </span>
                                                     <span class="description">Compartido públicamente - <?= $pregunta['creado_el'] ?></span>
                                                 </div>

@@ -89,10 +89,15 @@
                         </div>
                     </div>
 
+                    <?php
+                        $usuario = new Usuario();
+                        $usuario->guardarUsuario();
+                    ?>
+
                 </form>
 
                 <div class="text-center mt-3">
-                    <a href="login.html" class="text-center">Ya tengo una cuenta</a>
+                    <a href="<?= BASE_URL?>login" class="text-center">Ya tengo una cuenta</a>
                 </div>
             </div>
             <!-- /.form-box -->
