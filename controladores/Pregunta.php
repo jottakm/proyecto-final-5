@@ -53,4 +53,10 @@ class Pregunta
             }
         }
     }
+
+    static public function listrarPreguntasUsuario($tabla, $columna, $valor)
+    {
+        $respuesta = PreguntaModel:: listrarPreguntasUsuario($tabla, $columna, $valor);
+        return $respuesta;
+    }
 }

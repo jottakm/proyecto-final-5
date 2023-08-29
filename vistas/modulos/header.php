@@ -15,14 +15,19 @@
                 <li class="nav-item">
                     <a href="/" class="nav-link">Inicio</a>
                 </li>
-                <li class="nav-item">
-                    <a href="perfil.html" class="nav-link">Perfil</a>
-                </li>
 
+                <?php if (isset($_SESSION['id_usuario'])) : ?>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL ?>perfil" class="nav-link">Perfil</a>
+                    </li>
 
-                <li class="nav-item">
-                    <!-- <a href="vistas/modulos/admin.php" class="nav-link">Usuarios</a> -->
-                </li>
+                <?php endif; ?>
+
+                <?php if (isset($_SESSION['id_usuario']) && $_SESSION['rol'] == 'admin') : ?>
+                    <li class="nav-item">
+                        <a href="<?= BASE_URL ?>usuarios" class="nav-link">Usuarios</a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
         </div>
@@ -38,13 +43,15 @@
                 <a href="<?= BASE_URL ?>registro" class="btn btn-primary btn-sm ml-1">Regístrate</a>
             <?php endif; ?>
 
-            <div class="image">
-                <img src="<?= BASE_URL ?>vistas/dist/images/user.png" class="img-circle" width="30" alt="Imagen de usuario">
-            </div>
-            <?= $_SESSION['nombre'] . ' ' . $_SESSION['paterno'] ?>
-            <a href="salir" class="btn btn-outline-danger ml-1 btn-sm">
-                salir
-            </a>
+            <?php if (isset($_SESSION['id_usuario'])) : ?>
+                <div class="image">
+                    <img src="<?= BASE_URL ?>vistas/dist/images/user.png" class="img-circle" width="30" alt="Imagen de usuario">
+                </div>
+                <?= $_SESSION['nombre'] . ' ' . $_SESSION['paterno'] ?>
+                <a href="salir" class="btn btn-outline-danger ml-1 btn-sm">
+                    salir
+                </a>
+            <?php endif; ?>
 
 
         </ul>

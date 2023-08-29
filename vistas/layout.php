@@ -44,7 +44,16 @@ if (isset($_GET['ruta'])) {
     if ($vista != 'login' && $vista != 'registro')
         include_once 'modulos/header.php';
 
-    if ($vista === 'preguntas' || $vista === 'perfil' || $vista === 'respuesta' || $vista === 'pregunta' || $vista === 'registro' || $vista === 'login') {
+    if (
+        $vista === 'preguntas' ||
+        ($vista === 'perfil' && isset($_SESSION['id_usuario'])) ||
+        $vista === 'respuesta' ||
+        ($vista === 'pregunta') && isset($_SESSION['id_usuario']) ||
+        $vista === 'registro' ||
+        $vista === 'login' ||
+        $vista === 'salir' ||
+        ($vista === 'usuarios' && isset($_SESSION['id_usuario']) && $_SESSION['rol'] == 'admin')
+    ) {
         include_once 'modulos/' . $vista . '.php';
     } else {
         include_once 'modulos/404.php';

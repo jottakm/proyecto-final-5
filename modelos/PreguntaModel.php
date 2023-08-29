@@ -36,4 +36,12 @@ class PreguntaModel
         else
             return false;
     }
+
+    static public function listrarPreguntasUsuario($tabla, $columna, $valor)
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT p.*, (SELECT COUNT(*) FROM respuesta r where r.id_pregunta = p.id_pregunta ) as cantidad_respuestas 
+        from pregunta p where id_usuario = $valor");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

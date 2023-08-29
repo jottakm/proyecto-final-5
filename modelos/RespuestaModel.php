@@ -30,4 +30,11 @@ class RespuestaModel
         else
             return false;
     }
+
+    static public function listarRespuestasUsuario()
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM respuesta WHERE id_usuario= {$_SESSION['id_usuario']} ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

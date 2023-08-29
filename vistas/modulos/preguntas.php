@@ -66,14 +66,15 @@ $preguntas = Pregunta::listarPreguntas('pregunta', $columna, $valor);
                     <div class="card">
                         <div class="card-body">
 
-                            <a class="btn btn-primary btn-block" href="pregunta">
-                                Preguntar
-                            </a>
-
-
-                            <a class="btn btn-primary btn-block" href="login.html">
-                                Regístrese o inicie sesión para preguntar
-                            </a>
+                            <?php if (isset($_SESSION['id_usuario'])) : ?>
+                                <a class="btn btn-primary btn-block" href="pregunta">
+                                    Preguntar
+                                </a>
+                            <?php else : ?>
+                                <a class="btn btn-primary btn-block" href="<?php BASE_URL?>login">
+                                    Regístrese o inicie sesión para preguntar
+                                </a>
+                            <?php endif; ?>
 
                         </div>
                     </div>

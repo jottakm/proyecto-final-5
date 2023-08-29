@@ -56,4 +56,9 @@ class Respuesta {
         }
     }
 
+    static public function listarRespuestasUsuario()
+    {
+        return RespuestaModel::listarRespuestasUsuario();
+    }
+
 }

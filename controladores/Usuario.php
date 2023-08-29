@@ -40,7 +40,7 @@ class Usuario
                         $_SESSION['nombre'] = $usuario['nombre'];
                         $_SESSION['paterno'] = $usuario['paterno'];
                         $_SESSION['materno'] = $usuario['materno'];
-                        $_SESSION['correo'] = $usuario['correo'];
+                        $_SESSION['correo'] = $usuario['usuario'];
                         $_SESSION['rol'] = $usuario['rol'];
 
                         echo "<script>
@@ -54,6 +54,32 @@ class Usuario
                 echo "<script>
                     alert('El campo nombre, paterno, correo y la clave no debe contener caracteres especiales y debe ser un correo válido.');
                 </script>";
+            }
+        }
+    }
+
+    public function loginUsuario()
+    {
+        if(isset($_POST['usuario']) && isset($_POST['clave'])){
+            $usuario = UsuarioModel::mostrarUsuarioLogin($_POST['usuario']);
+            if($usuario){
+
+                if(password_verify($_POST['clave'],  $usuario['clave'])){
+                    $_SESSION['id_usuario'] = $usuario['id_usuario'];
+                    $_SESSION['nombre'] = $usuario['nombre'];
+                    $_SESSION['paterno'] = $usuario['paterno'];
+                    $_SESSION['materno'] = $usuario['materno'];
+                    $_SESSION['correo'] = $usuario['usuario'];
+                    $_SESSION['rol'] = $usuario['rol'];
+
+                    echo "<script>
+                        window.location.href = '" .BASE_URL. "preguntas';
+                    </script>";
+                }else{
+                    echo '<br><div class="alert alert-danger">Error al ingresar al sistema.</div>';
+                }
+            }else{
+                echo '<br><div class="alert alert-danger">Error al ingresar al sistema.</div>';
             }
         }
     }
