@@ -25,8 +25,25 @@ $personas = Persona::listar('persona', null, null);
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <button class="btn btn-danger">PDF</button>
-                            <button class="btn btn-success">EXCEL</button>
+
+                            <div class="d-flex">
+                            <form action="<?= BASE_URL ?>controladores/reportes/pdf.php" target="_blank" method="post">
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fa fa-file-pdf"></i>
+                                    PDF
+                                </button>
+                            </form>
+                            
+                            &nbsp;
+
+                            <form action="<?= BASE_URL ?>controladores/reportes/excel.php" target="_blank" method="post">
+                                <button class="btn btn-success" type="submit">
+                                    <i class="fa fa-file-excel"></i>
+                                    EXCEL
+                                </button>
+                            </form>
+                            </div>
+
                             <table class="table table-striped table-bordered mt-2">
                                 <thead>
                                     <tr>

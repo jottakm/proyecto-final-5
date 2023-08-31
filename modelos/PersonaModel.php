@@ -18,4 +18,11 @@ class PersonaModel
             return $stmt->fetch();
         }
     }
+
+    static public function mostrarUsuario()
+    {
+        $stmt = Conexion::conectar()->prepare("SELECT * FROM persona p JOIN usuario u ON p.id_persona=u.id_usuario");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }
